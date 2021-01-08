@@ -36,6 +36,13 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+
+
+	@GetMapping(path="/message")
+	public String getMessage() {
+
+		return "Hello Message";
+	}
 	
 	@GetMapping(path="/{id}", produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<UserResponse> getUser(@PathVariable String id) {
@@ -67,8 +74,6 @@ public class UserController {
 		
 		return new ResponseEntity<List<UserResponse>>(usersResponse, HttpStatus.OK);
 	}
-	
-	
 	
 	@PostMapping(
 			    consumes={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}, 
