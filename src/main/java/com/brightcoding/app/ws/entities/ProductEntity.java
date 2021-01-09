@@ -22,6 +22,7 @@ public class ProductEntity implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+ 
   private long id;
 
   private String code;
@@ -38,12 +39,10 @@ public class ProductEntity implements Serializable {
 
   
   
-  @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-  @JoinColumn(name = "id",nullable = true)
+  @ManyToOne()
   private CategoryEntity category;
   
-  @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-  @JoinColumn(name = "id",nullable = true)
+  @ManyToOne()
   private BrandEntity brand;
   
   

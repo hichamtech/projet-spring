@@ -10,7 +10,5 @@ import com.brightcoding.app.ws.entities.ProductEntity;
 public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
 
 
-	List<ProductEntity> findByCategory(CategoryEntity category);
 	
-	ProductEntity findByProductId(String productId);
 }

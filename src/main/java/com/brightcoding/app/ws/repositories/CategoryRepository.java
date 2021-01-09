@@ -6,7 +6,6 @@ import com.brightcoding.app.ws.entities.CategoryEntity;
 
 public interface CategoryRepository  extends CrudRepository<CategoryEntity, Long> {
 	
-	CategoryEntity findByCategoryId(String categoryId);
 
 
 }
