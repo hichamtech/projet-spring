@@ -12,11 +12,13 @@ public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+  private long id;
 
-  private String code;
+  private String productId;
 
   private String label;
+
+  private String productImage ;
 
   private String description;
 
@@ -24,31 +26,31 @@ public class Product {
 
   private int qteStock;
 
+  public String getProductId() {
+    return productId;
+  }
+
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
+
   public Product() {
   }
 
-  public Product(String code, String label, String description, Double price, int qteStock) {
-    this.code = code;
-    this.label = label;
-    this.description = description;
-    this.price = price;
-    this.qteStock = qteStock;
-  }
-
-  public Long getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(long id) {
     this.id = id;
   }
 
-  public String getCode() {
-    return code;
+  public String getProductImage() {
+    return productImage;
   }
 
-  public void setCode(String code) {
-    this.code = code;
+  public void setProductImage(String productImage) {
+    this.productImage = productImage;
   }
 
   public String getLabel() {
@@ -83,15 +85,4 @@ public class Product {
     this.qteStock = qteStock;
   }
 
-  @Override
-  public String toString() {
-    return "Product{" +
-            "id=" + id +
-            ", code='" + code + '\'' +
-            ", label='" + label + '\'' +
-            ", description='" + description + '\'' +
-            ", price=" + price +
-            ", qteStock=" + qteStock +
-            '}';
-  }
 }
