@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,10 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.brightcoding.app.ws.requests.AddressRequest;
 import com.brightcoding.app.ws.requests.CategoryRequest;
+import com.brightcoding.app.ws.requests.UserRequest;
+import com.brightcoding.app.ws.responses.CategoryResponse;
 import com.brightcoding.app.ws.responses.CategoryResponse;
 import com.brightcoding.app.ws.responses.CategoryResponse;
 import com.brightcoding.app.ws.services.CategoryService;
 import com.brightcoding.app.ws.shared.dto.CategoryDto;
+import com.brightcoding.app.ws.shared.dto.UserDto;
 import com.brightcoding.app.ws.shared.dto.CategoryDto;
 
 
@@ -66,13 +70,24 @@ public class CategoryController {
 	//update category
 	
 	@PutMapping("update/{id}")
-	public ResponseEntity<String> updateCategory(@PathVariable(name="id") String categoryId) {
-		return new ResponseEntity<>("update category", HttpStatus.ACCEPTED);
+	public ResponseEntity<CategoryResponse> updateCategory(@PathVariable(name="id") String categoryId,@RequestBody CategoryRequest categoryRequest) {
+
+		CategoryDto categoryDto = new CategoryDto();
+		
+		BeanUtils.copyProperties(categoryRequest, categoryDto);
+		
+		CategoryDto updateCategory = categoryService.updatCategory(categoryId, categoryDto) ;
+		
+		CategoryResponse categoryResponse = new CategoryResponse();
+		
+		BeanUtils.copyProperties(updateCategory, categoryResponse);
+		
+		return new ResponseEntity<CategoryResponse>(categoryResponse, HttpStatus.ACCEPTED);
 	}
 	
 	
 	//delete categorie
-	@DeleteMapping("/{id}")
+	@DeleteMapping("delete/{id}")
 	public ResponseEntity<?> deleteCategory(@PathVariable(name="id") String categoryId) {
 		
 		categoryService.deleteCategory(categoryId);

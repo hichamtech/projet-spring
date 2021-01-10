@@ -2,23 +2,18 @@ package com.brightcoding.app.ws.services.impl;
 
 import java.lang.reflect.Type;
 import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.brightcoding.app.ws.entities.AddressEntity;
 import com.brightcoding.app.ws.entities.CategoryEntity;
-import com.brightcoding.app.ws.entities.UserEntity;
-import com.brightcoding.app.ws.repositories.AddressRepository;
 import com.brightcoding.app.ws.repositories.CategoryRepository;
 import com.brightcoding.app.ws.repositories.UserRepository;
 import com.brightcoding.app.ws.services.CategoryService;
 import com.brightcoding.app.ws.shared.Utils;
 import com.brightcoding.app.ws.shared.dto.CategoryDto;
-import com.brightcoding.app.ws.shared.dto.CategoryDto;
-import com.brightcoding.app.ws.shared.dto.UserDto;
+
 
 @Service
 public class CategoryServiceIml implements CategoryService {
@@ -59,6 +54,24 @@ public class CategoryServiceIml implements CategoryService {
 		return categoryDto;
 	
 	}
+	
+	@Override
+	public CategoryDto updatCategory(String categoryId, CategoryDto categoryDto) {
+		
+		CategoryEntity categoryEntity = categoryRepository.findById(categoryId);
+		
+		if(categoryEntity == null) throw new RuntimeException("Category not found");; 
+		
+		categoryEntity.setName(categoryDto.getName());
+		
+		CategoryEntity categoryUpdated = categoryRepository.save(categoryEntity);
+		
+		CategoryDto category = new CategoryDto();
+		
+		BeanUtils.copyProperties(categoryUpdated, category);
+		
+		return category;
+	}
 
 	@Override
 	public void deleteCategory(String CategoryId) {
@@ -68,6 +81,7 @@ public class CategoryServiceIml implements CategoryService {
 		
 		categoryRepository.delete(category);		
 	}
+	
 
 	
 

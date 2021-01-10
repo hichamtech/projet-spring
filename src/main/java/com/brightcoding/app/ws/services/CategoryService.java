@@ -13,5 +13,8 @@ public interface CategoryService {
 
 
 	void deleteCategory(String CategoryId);
+
+
+	CategoryDto updatCategory(String categoryId, CategoryDto categoryDto);
 	
 }
