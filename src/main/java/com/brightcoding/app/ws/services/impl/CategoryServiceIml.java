@@ -60,6 +60,15 @@ public class CategoryServiceIml implements CategoryService {
 	
 	}
 
+	@Override
+	public void deleteCategory(String CategoryId) {
+	CategoryEntity category = categoryRepository.findById(CategoryId);
+		
+		if(category == null) throw new RuntimeException("Address not found");
+		
+		categoryRepository.delete(category);		
+	}
+
 	
 
 }
