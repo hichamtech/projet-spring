@@ -40,7 +40,6 @@ public class UserController {
 
 	@GetMapping(path="/message")
 	public String getMessage() {
-
 		return "Hello Message";
 	}
 	
