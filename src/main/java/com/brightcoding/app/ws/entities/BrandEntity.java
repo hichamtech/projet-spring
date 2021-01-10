@@ -8,10 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="brand")
+@Table(name="brands")
 public class BrandEntity implements Serializable {
 
-	
 	/**
 	 * 
 	 */

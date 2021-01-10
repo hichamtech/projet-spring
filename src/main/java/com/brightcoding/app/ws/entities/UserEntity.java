@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class UserEntity implements Serializable {
 
 	
@@ -55,9 +55,7 @@ public class UserEntity implements Serializable {
 	
 	@OneToMany(mappedBy="user", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<AddressEntity> addresses;
-	
-	@OneToOne(mappedBy="user", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	private ContactEntity contact;
+
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="users")
 	private Set<GroupEntity> groups = new HashSet<>();
@@ -141,14 +139,6 @@ public class UserEntity implements Serializable {
 
 	public void setAddresses(List<AddressEntity> addresses) {
 		this.addresses = addresses;
-	}
-
-	public ContactEntity getContact() {
-		return contact;
-	}
-
-	public void setContact(ContactEntity contact) {
-		this.contact = contact;
 	}
 
 	public Boolean getAdmin() {
